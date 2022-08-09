@@ -1,6 +1,7 @@
-import React from "react"
+import React from "react";
+import { useNavigate } from "react-router";
 
-export default function Login (props) {
+export default function Login(props) {
   return (
     <div className="Auth-form-container">
       <form className="Auth-form">
@@ -33,5 +34,5 @@ export default function Login (props) {
         </div>
       </form>
     </div>
-  )
+  );
 }

@@ -1,27 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-import Form from './form.js';
-import Login from './login.js';
+// import "./App.css";
+
+// We use Route in order to define the different routes of our application
+import { Route, Routes } from "react-router-dom";
+
+// We import all the components we need in our app
+import Navbar from "./components/navbar";
+import Form from "./components/form.js";
+import Login from "./components/login.js";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-       
-        <div>
-          <Form/>
-          <Login/>
-        </div>
-        {/* <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-    
-        </a> */}
-      </header>
+      <Navbar />
+
+      <Routes>
+        <Route exact path="/signup" element={<Form />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </div>
   );
 }
