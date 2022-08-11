@@ -1,27 +1,30 @@
-import logo from './logo.svg';
+
 import './App.css';
-import Form from './form.js';
 import Login from './login.js';
+import Home from './home.js';
+import Signup from './signup.js';
+import {BrowserRouter , Route, Routes, Link} from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-       
-        <div>
-          <Form/>
-          <Login/>
-        </div>
-        {/* <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-    
-        </a> */}
-      </header>
+    <BrowserRouter>
+    <nav>
+      <h1> My Fuffy Friend</h1>
+      <Link to="/">Home</Link>
+      <Link to="/login">Log in</Link>
+      <Link to="/signup">Become a member</Link>
+
+    </nav>
+  
+       <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/signup" element={<Signup/>}/>
+          
+         
+       </Routes>
+    </BrowserRouter>
     </div>
   );
 }
