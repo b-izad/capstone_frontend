@@ -22,10 +22,13 @@ function App() {
         content,
       })
       .then((result) => {
+        console.log("result: ", result);
+        console.log(result.data);
         const newPost = {
           post_id: result.data.post.post_id,
           title: result.data.post.title,
-          author: result.data.post.owner,
+          author: result.data.post.author,
+          content: result.data.post.content,
         };
         setPosts([...posts, newPost]);
       })
