@@ -1,11 +1,18 @@
 import "./App.css";
-
+import { useState, useEffect } from "react";
 import Login from "./components/Login.js";
 import Home from "./components/Home.js";
 import Signup from "./components/SignUp";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { getPosts } from "./api/PostAPi";
 
 function App() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    getPosts(posts, setPosts);
+  }, []);
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -17,7 +24,10 @@ function App() {
         </nav>
 
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={<Home posts={posts} setPosts={setPosts} />}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { addPost } from "../api/PostAPi";
 
-const NewPostForm = ({ onAddPostCallback }) => {
+const NewPostForm = ({ posts, setPosts }) => {
   const [formFields, setFormFields] = useState({
     title: "",
     author: "",
@@ -23,7 +24,13 @@ const NewPostForm = ({ onAddPostCallback }) => {
   const onFormSubmit = (event) => {
     event.preventDefault();
 
-    onAddPostCallback(formFields.title, formFields.author, formFields.content);
+    addPost(
+      formFields.title,
+      formFields.author,
+      formFields.content,
+      posts,
+      setPosts
+    );
 
     setFormFields({
       title: "",
