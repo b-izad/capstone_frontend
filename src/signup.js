@@ -1,5 +1,20 @@
 import React, {useState} from 'react';
 
+// function handleclick(){
+// fetch('https://myfluffyfriends-backend.herokuapp.com/api/users/signup', {
+//   method: 'POST',
+//   headers: { 'Content-Type': 'application/json' },
+//   body: JSON.stringify({
+//   	'foo': 'bar'
+//   }),
+// })
+//   .then((res) => res.json())
+//   .then((data) => {
+//     // Do some stuff ...
+//   })
+//   .catch((err) => console.log(err));
+// }
+
 function Signup() {
     return(
       <div className="form">
@@ -26,7 +41,7 @@ function Signup() {
               </div>
           </div>
           <div class="footer">
-              <button type="submit" class="btn">Register</button>
+              {/* <button onclick={handleclick} type="submit" class="btn">Register</button> */}
           </div>
       </div>      
     )       
