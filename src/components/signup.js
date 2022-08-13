@@ -1,21 +1,6 @@
 import React, { useState } from "react";
 
-// function handleclick(){
-// fetch('https://myfluffyfriends-backend.herokuapp.com/api/users/signup', {
-//   method: 'POST',
-//   headers: { 'Content-Type': 'application/json' },
-//   body: JSON.stringify({
-//   	'foo': 'bar'
-//   }),
-// })
-//   .then((res) => res.json())
-//   .then((data) => {
-//     // Do some stuff ...
-//   })
-//   .catch((err) => console.log(err));
-// }
-
-const Signup = () => {
+const SignUp = () => {
   return (
     <div className="form">
       <div className="form-body">
@@ -83,4 +68,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignUp;

@@ -68,6 +68,6 @@ const NewPostForm = ({ posts, setPosts }) => {
 };
 
 NewPostForm.propTypes = {
-  onAddPostCallback: PropTypes.func.isRequired,
+  addPost: PropTypes.func.isRequired,
 };
 export default NewPostForm;

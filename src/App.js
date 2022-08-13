@@ -5,34 +5,58 @@ import Home from "./components/Home.js";
 import Signup from "./components/SignUp";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import { getPosts } from "./api/PostAPi";
+import { Nav, Navbar, Container } from "react-bootstrap";
 
 function App() {
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
+  useEffect((posts) => {
     getPosts(posts, setPosts);
   }, []);
 
   return (
-    <div className="App">
-      <BrowserRouter>
-        <nav>
-          <h1> My Fuffy Friend</h1>
-          <Link to="/">Home</Link>
-          <Link to="/login">Log in</Link>
-          <Link to="/signup">Become a member</Link>
-        </nav>
+    <BrowserRouter>
+      <div className="app">
+        <>
+          <Navbar bg="dark" variant={"dark"} expand="lg">
+            <Container fluid>
+              <Navbar.Brand href="#Home">Fluffy Friends</Navbar.Brand>
+              <Navbar.Toggle aria-controls="navbarScroll" />
+              <Navbar.Collapse id="navbarScroll">
+                <Nav
+                  className="me-auto my-2 my-lg-0"
+                  style={{ maxHeight: "100px" }}
+                  navbarScroll
+                >
+                  <Nav.Link as={Link} to={"/"}>
+                    Home
+                  </Nav.Link>
 
-        <Routes>
-          <Route
-            path="/"
-            element={<Home posts={posts} setPosts={setPosts} />}
-          />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+                  <Nav.Link as={Link} to={"/login"}>
+                    Log in
+                  </Nav.Link>
+
+                  <Nav.Link as={Link} to={"/signup"}>
+                    Become a member
+                  </Nav.Link>
+                </Nav>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
+        </>
+
+        <div>
+          <Routes>
+            <Route
+              path="/"
+              element={<Home posts={posts} setPosts={setPosts} />}
+            />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+        </div>
+      </div>
+    </BrowserRouter>
   );
 }
 
