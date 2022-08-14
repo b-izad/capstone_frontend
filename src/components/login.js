@@ -1,42 +1,68 @@
-import React from "react"
+import { useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
-function Login () {
+const Login = () => {
+  const [data, setData] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = "http://localhost:5000/api/users/signin";
+      const { data: res } = await axios.post(url, data);
+      localStorage.setItem("token", res.data);
+      window.location = "/";
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+  };
+
   return (
-    <div className="Auth-form-container">
-      <form className="Auth-form">
-        <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Sign In</h3>
-          <div className="form-group mt-3">
-            <label>Email address</label>
+    <div>
+      <div>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <h1>Login to Your Account</h1>
             <input
               type="email"
-              className="form-control mt-1"
-              placeholder="Enter email"
+              placeholder="Email"
+              name="email"
+              onChange={handleChange}
+              value={data.email}
+              required
             />
-          </div>
-          <div className="form-group mt-3">
-            <label>Password</label>
             <input
               type="password"
-              className="form-control mt-1"
-              placeholder="Enter password"
+              placeholder="Password"
+              name="password"
+              onChange={handleChange}
+              value={data.password}
+              required
             />
-          </div>
-          <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </div>
-          <p className="forgot-password text-right mt-2">
-            {/* Forgot <a href="#">password?</a> */}
-          </p>
+            {error && <div>{error}</div>}
+            <button type="submit">Sing In</button>
+          </form>
         </div>
-      </form>
+        <div>
+          <h1>New Here ?</h1>
+          <Link to="/Signup">
+            <button type="button">Sing Up</button>
+          </Link>
+        </div>
+      </div>
     </div>
-  )
-}
-
-
-
+  );
+};
 
 export default Login;
