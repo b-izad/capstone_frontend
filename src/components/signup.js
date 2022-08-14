@@ -1,71 +1,100 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import axios from "axios";
 
-const SignUp = () => {
-  return (
-    <div className="form">
-      <div className="form-body">
-        <div className="username">
-          <label className="form__label" for="firstName">
-            First Name{" "}
+const Signup = () => {
+  //here would be logic for holding state of input fields (which are FormControls in Bootstrap React)
+  //need some sort of onSubmit function for Button, which would also link to appropriate page
+  const [inputs, setInputs] = useState({
+    username: "",
+    password: "",
+    profile: "",
+  });
+
+  const onChange = (e) => {
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
+  };
+
+  const createUser = (array) => {
+    axios
+      .post(`${process.env.REACT_APP_BACKEND_URL}/signup`, {
+        name: array.name,
+        password: array.password,
+        email: array.email,
+        profile: array.profile,
+      })
+      .then((result) => {
+        console.log("result: ", result);
+        console.log(result.data);
+        const newUser = {
+          user_id: result.data.user.user_id,
+          password: result.data.user.password,
+          email: result.data.user.email,
+          profile: result.data.user.profile,
+        };
+        setInputs([...inputs, newUser]);
+      })
+      .catch((error) => console.log(error.response.data));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createUser(inputs);
+    setInputs({
+      profile: "",
+      username: "",
+      password: "",
+    });
+
+    return (
+      <form onSubmit={handleSubmit}>
+        <div className="registerForm" controlId="formUsername">
+          <label>
+            <input
+              type="text"
+              name="Username"
+              onChange={(e) => onChange(e)}
+              value={inputs.username}
+              placeholder="Username"
+            />
           </label>
-          <input
-            className="form__input"
-            type="text"
-            id="firstName"
-            placeholder="First Name"
-          />
         </div>
-        <div className="lastname">
-          <label className="form__label" for="lastName">
-            Last Name{" "}
+        <div className="registerForm" controlId="formPassword">
+          <label>
+            <input
+              type="text"
+              name="password"
+              onChange={(e) => onChange(e)}
+              value={inputs.password}
+              placeholder="password"
+              required
+            />
           </label>
-          <input
-            type="text"
-            name=""
-            id="lastName"
-            className="form__input"
-            placeholder="LastName"
-          />
         </div>
-        <div className="email">
-          <label className="form__label" for="email">
-            Email{" "}
+
+        <div className="registerForm" controlId="formProfile">
+          <label>
+            <input
+              type="text"
+              name="profile"
+              onChange={(e) => onChange(e)}
+              value={inputs.profile}
+              placeholder="profile"
+              required
+            />
           </label>
-          <input
-            type="email"
-            id="email"
-            className="form__input"
-            placeholder="Email"
-          />
         </div>
-        <div className="password">
-          <label className="form__label" for="password">
-            Password{" "}
-          </label>
-          <input
-            className="form__input"
-            type="password"
-            id="password"
-            placeholder="Password"
-          />
-        </div>
-        <div className="confirm-password">
-          <label className="form__label" for="confirmPassword">
-            Confirm Password{" "}
-          </label>
-          <input
-            className="form__input"
-            type="password"
-            id="confirmPassword"
-            placeholder="Confirm Password"
-          />
-        </div>
-      </div>
-      <div class="footer">
-        {/* <button onclick={handleclick} type="submit" class="btn">Register</button> */}
-      </div>
-    </div>
-  );
+
+        <button
+          onClick={this.handleSubmit}
+          variant="success"
+          type="submit"
+          className="createUser"
+        >
+          Create New User
+        </button>
+      </form>
+    );
+  };
 };
 
-export default SignUp;
+export default Signup;
