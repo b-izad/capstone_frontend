@@ -2,7 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import Login from "./components/Login.js";
 import Home from "./components/Home.js";
-import Signup from "./components/SignUp";
+import SignUp from "./components/SignUp";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import { getPosts } from "./api/PostAPi";
 import { Nav, Navbar, Container } from "react-bootstrap";
@@ -75,7 +75,7 @@ function App() {
                 }
               />
               <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
+              <Route path="/signup" element={<SignUp />} />
               <Route path="/newpost" element={<NewPost />} />
               <Route path="*" element={"404 Error: Page Not Found"} />
             </Routes>
