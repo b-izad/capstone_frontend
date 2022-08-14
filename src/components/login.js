@@ -29,39 +29,45 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <div>
-        <div>
-          <form onSubmit={handleSubmit}>
-            <h1>Login to Your Account</h1>
-            <input
-              type="email"
-              placeholder="Email"
-              name="email"
-              onChange={handleChange}
-              value={data.email}
-              required
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              onChange={handleChange}
-              value={data.password}
-              required
-            />
-            {error && <div>{error}</div>}
-            <button type="submit">Sing In</button>
-          </form>
-        </div>
-        <div>
-          <h1>New Here ?</h1>
-          <Link to="/Signup">
-            <button type="button">Sing Up</button>
-          </Link>
-        </div>
+    <form onSubmit={handleSubmit}>
+      <h3>Sign In</h3>
+      <div className="mb-3">
+        <label>Email address</label>
+        <input
+          className="form-control"
+          placeholder="Enter email"
+          type="email"
+          onChange={handleChange}
+          value={data.email}
+          required
+        />
       </div>
-    </div>
+      <div className="mb-3">
+        <label>Password</label>
+        <input
+          className="form-control"
+          type="password"
+          placeholder="Enter password here"
+          onChange={handleChange}
+          value={data.password}
+          required
+        />
+      </div>
+      {error && <div>{error}</div>}
+      <button type="submit" className="btn btn-primary">
+        Sing In
+      </button>
+      <p className="forgot-password text-right">
+        New Here? <Link to="/signup">Sign Up!</Link>
+      </p>
+    </form>
+
+    // {/* <div>
+    //   <h1>New Here ?</h1>
+    //   <Link to="/Signup">
+    //     <button type="button">Sing Up</button>
+    //   </Link>
+    // </div> */}
   );
 };
 

@@ -12,29 +12,22 @@ import axios from "axios";
 //     });
 // };
 
-export const addUser = (
-  username,
-  password,
-  email,
-  profile,
-  users,
-  setUsers
-) => {
+export const addUser = (username, password, email, users, setUsers) => {
   axios
     .post(`${process.env.REACT_APP_BACKEND_URL}/signup`, {
       username,
-      password,
       email,
-      profile,
+      password,
     })
     .then((result) => {
       console.log("result: ", result);
       console.log(result.data);
       const newUser = {
         user_id: result.data.user.user_id,
-        password: result.data.user.password,
+        username: result.data.user.user_id,
         email: result.data.user.email,
-        profile: result.data.user.profile,
+        password: result.data.user.password,
+        // profile: result.data.user.profile,
       };
       setUsers([...users, newUser]);
     })
