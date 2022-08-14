@@ -1,134 +1,90 @@
-// import axios from "axios";
-// import { addUser } from "../api/UserApi";
+import { useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
-// const SignUp = (users, setUsers) => {
-//here would be logic for holding state of input fields (which are FormControls in Bootstrap React)
-//need some sort of onSubmit function for Button, which would also link to appropriate page
-// const [inputs, setInputs] = useState({
-//   username: "",
-//   email: "",
-//   password: "",
-// });
+const SignUp = () => {
+  const [data, setData] = useState({
+    username: "",
+    profile: "",
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-// const onUserNameChange = (event) => {
-//   setInputs({ ...inputs, [event.target.username]: event.target.value });
-// };
-// const onEmailChange = (event) => {
-//   setInputs({ ...inputs, [event.target.email]: event.target.value });
-// };
-// const onPasswordChange = (event) => {
-//   setInputs({ ...inputs, [event.target.password]: event.target.value });
-// };
-// const onProfileChange = (e) => {
-//   setInputs({ ...inputs, [e.target.profile]: e.target.value });
-// };
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
+  };
 
-// const createUser = (array) => {
-//   axios
-//     .post(`${process.env.REACT_APP_BACKEND_URL}/signup`, {
-//       name: array.name,
-//       password: array.password,
-//       email: array.email,
-//       profile: array.profile,
-//     })
-//     .then((result) => {
-//       console.log("result: ", result);
-//       console.log(result.data);
-//       const newUser = {
-//         user_id: result.data.user.user_id,
-//         password: result.data.user.password,
-//         email: result.data.user.email,
-//         profile: result.data.user.profile,
-//       };
-//       setInputs([...inputs, newUser]);
-//     })
-//     .catch((error) => console.log(error.response.data));
-// };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = "http://localhost:5000/api/users/signup";
+      const { data: res } = await axios.post(url, data);
+      navigate("/login");
+      console.log(res.message);
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+  };
 
-// const handleSubmit = (e) => {
-//   e.preventDefault();
-//   createUser(inputs);
-//   setInputs({
-//     profile: "",
-//     username: "",
-//     password: "",
-//   });
-// };
+  return (
+    <div>
+      <div>
+        <div>
+          <h1>Welcome Back</h1>
+          <Link to="/login">
+            <button type="button">sign in</button>
+          </Link>
+        </div>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <h1>Create Account</h1>
+            <input
+              type="text"
+              placeholder="Username"
+              name="username"
+              onChange={handleChange}
+              value={data.username}
+              required
+            />
+            <input
+              type="text"
+              placeholder="profile"
+              name="profile"
+              onChange={handleChange}
+              value={data.profile}
+              required
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              onChange={handleChange}
+              value={data.email}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              onChange={handleChange}
+              value={data.password}
+              required
+            />
+            {error && <div>{error}</div>}
+            <button type="submit">Sign Up</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-//   const onInputSubmit = (event) => {
-//     event.preventDefault();
-
-//     addUser(inputs.username, inputs.email, inputs.password, users, setUsers);
-
-//     setInputs({
-//       username: "",
-//       email: "",
-//       password: "",
-//     });
-//   };
-
-//   return (
-//     <form onSubmit={onInputSubmit}>
-//       <div className="registerForm" controlId="formUsername">
-//         <label>
-//           <input
-//             type="text"
-//             name="Username"
-//             onChange={onUserNameChange}
-//             value={inputs.username}
-//             placeholder="Username"
-//             required
-//           />
-//         </label>
-//       </div>
-//       <div className="registerForm" controlId="formUsername">
-//         <label>
-//           <input
-//             type="text"
-//             name="Email"
-//             onChange={onEmailChange}
-//             value={inputs.email}
-//             placeholder="Email"
-//             required
-//           />
-//         </label>
-//       </div>
-//       <div className="registerForm" controlId="formPassword">
-//         <label>
-//           <input
-//             type="text"
-//             name="password"
-//             onChange={onPasswordChange}
-//             value={inputs.password}
-//             placeholder="password"
-//             required
-//           />
-//         </label>
-//       </div>
-
-//       {/* <div className="registerForm" controlId="formProfile">
-//         <label>
-//           <input
-//             type="text"
-//             name="profile"
-//             onChange={onProfileChange}
-//             value={inputs.profile}
-//             placeholder="profile"
-//             required
-//           />
-//         </label>
-//       </div> */}
-
-//       <button
-//         type="submit"
-//         onClick={onInputSubmit}
-//         variant="success"
-//         className="createUser"
-//       >
-//         Sign Up
-//       </button>
-//     </form>
-//   );
-// };
-
-// export default SignUp;
+export default SignUp;
