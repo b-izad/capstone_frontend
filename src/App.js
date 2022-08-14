@@ -2,12 +2,13 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import Login from "./components/Login.js";
 import Home from "./components/Home.js";
-import Signup from "./components/SignUp";
+import Signup from "./components/SignUp.js";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import { getPosts } from "./api/PostAPi";
 
 function App() {
   const [posts, setPosts] = useState([]);
+
 
   useEffect(() => {
     getPosts(posts, setPosts);
@@ -17,7 +18,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <nav>
-          <h1> My Fuffy Friend</h1>
+          <h1> My Fluffy Friend</h1>
           <Link to="/">Home</Link>
           <Link to="/login">Log in</Link>
           <Link to="/signup">Become a member</Link>
