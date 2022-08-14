@@ -54,9 +54,11 @@ const Login = () => {
         />
       </div>
       {error && <div>{error}</div>}
-      <button type="submit" className="btn btn-primary">
-        Sing In
-      </button>
+      <div className="d-grid">
+        <button type="submit" className="btn btn-primary">
+          Sing In
+        </button>
+      </div>
       <p className="forgot-password text-right">
         New Here? <Link to="/signup">Sign Up!</Link>
       </p>
