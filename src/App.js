@@ -45,7 +45,7 @@ function App() {
                     </Nav.Link>
 
                     <Nav.Link as={Link} to={"/login"}>
-                      Log in
+                      Login
                     </Nav.Link>
 
                     <Nav.Link as={Link} to={"/signup"}>

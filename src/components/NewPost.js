@@ -5,7 +5,7 @@ import { addPost } from "../api/PostAPi";
 const NewPost = ({ posts, setPosts }) => {
   const [formFields, setFormFields] = useState({
     title: "",
-    author: "",
+    zipcode: "",
     content: "",
   });
 
@@ -18,7 +18,7 @@ const NewPost = ({ posts, setPosts }) => {
   };
 
   const onAuthorChange = (event) => {
-    setFormFields({ ...formFields, author: event.target.value });
+    setFormFields({ ...formFields, zipcode: event.target.value });
   };
 
   const onFormSubmit = (event) => {
@@ -26,7 +26,7 @@ const NewPost = ({ posts, setPosts }) => {
 
     addPost(
       formFields.title,
-      formFields.author,
+      formFields.zipcode,
       formFields.content,
       posts,
       setPosts
@@ -34,40 +34,64 @@ const NewPost = ({ posts, setPosts }) => {
 
     setFormFields({
       title: "",
-      author: "",
+      zipcode: "",
       content: "",
     });
   };
 
   return (
-    <form className="form-box" onSubmit={onFormSubmit}>
-      <label htmlFor="postTitle">Title:</label>
-      <input
-        name="formTitle"
-        value={formFields.title}
-        onChange={onTitleChange}
-        required
-      />
-      <label htmlFor="postAuthor">author:</label>
-      <input
-        name="postAuthor"
-        value={formFields.author}
-        onChange={onAuthorChange}
-        required
-      />
-      <label htmlFor="postContent">Content:</label>
-      <input
-        name="formContent"
-        value={formFields.content}
-        onChange={onContentChange}
-        required
-      />
-      <button type="submit">Submit</button>
-    </form>
+    <div className="d-flex align-items-center justify-content-center mt-7">
+      <form
+        className="col-xs-12 col-xs-offset-0 col-sm-6 col-sm-offset-3"
+        onSubmit={onFormSubmit}
+      >
+        <h3>Create a post</h3>
+        <div className="form-outline mt-5 mb-4">
+          <label className="form-label" for="postTitle">
+            Title
+          </label>
+          <input
+            className="form-control"
+            name="postTitle"
+            value={formFields.title}
+            onChange={onTitleChange}
+            required
+          />
+          <label className="form-label" for="postZipcode">
+            Zipcode
+          </label>
+          <input
+            className="form-control"
+            name="postZipcode"
+            value={formFields.author}
+            onChange={onAuthorChange}
+            required
+          />
+
+          {/* <!-- Message input --> */}
+          <div class="form-outline mb-4">
+            <label className="form-label" for="postContent">
+              Message
+            </label>
+            <textarea
+              className="form-control"
+              id="postContent"
+              rows="4"
+              name="formContent"
+              value={formFields.content}
+              onChange={onContentChange}
+              required
+            />
+          </div>
+          <div className="d-grid">
+            <button type="submit" className="btn btn-outline-dark">
+              Add Post
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
 
-// NewPostForm.propTypes = {
-//   addPost: PropTypes.func.isRequired,
-// };
 export default NewPost;

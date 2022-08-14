@@ -3,5 +3,12 @@ body {
 }
 
 .App {
-  text-align: center;
+}
+
+.mt-6 {
+  margin-top: 6rem;
+}
+
+.mt-7 {
+  margin-top: 9rem;
 }

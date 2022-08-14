@@ -36,52 +36,63 @@ const SignUp = () => {
 
   return (
     <div>
-      <div>
-        <div>
-          <h1>Welcome Back</h1>
-          <Link to="/login">
-            <button type="button">sign in</button>
-          </Link>
-        </div>
-        <div>
-          <form onSubmit={handleSubmit}>
-            <h1>Create Account</h1>
+      <div className="d-flex align-items-center justify-content-center mt-7">
+        <form
+          className="login col-xs-12 col-xs-offset-0 col-sm-6 col-sm-offset-3"
+          onSubmit={handleSubmit}
+        >
+          <h3>Create an Account</h3>
+          <div className="mb-3 mt-5">
+            <label>Username</label>
             <input
+              className="form-control"
               type="text"
-              placeholder="Username"
               name="username"
               onChange={handleChange}
               value={data.username}
               required
             />
+          </div>
+          {/* <input
+            type="text"
+            placeholder="profile"
+            name="profile"
+            onChange={handleChange}
+            value={data.profile}
+            required
+          /> */}
+          <div className="mb-3">
+            <label>Email</label>
             <input
-              type="text"
-              placeholder="profile"
-              name="profile"
-              onChange={handleChange}
-              value={data.profile}
-              required
-            />
-            <input
+              className="form-control"
               type="email"
-              placeholder="Email"
               name="email"
               onChange={handleChange}
               value={data.email}
               required
             />
+          </div>
+          <div className="mb-3">
+            <label>Password</label>
             <input
+              className="form-control"
               type="password"
-              placeholder="Password"
               name="password"
               onChange={handleChange}
               value={data.password}
               required
             />
-            {error && <div>{error}</div>}
-            <button type="submit">Sign Up</button>
-          </form>
-        </div>
+          </div>
+          {error && <div>{error}</div>}
+          <div className="d-grid">
+            <button type="submit" className="btn btn-outline-dark">
+              Sign Up
+            </button>
+          </div>
+          <p className="forgot-password text-right">
+            Already a member? <Link to="/login">Sign In</Link>
+          </p>
+        </form>
       </div>
     </div>
   );
