@@ -1,102 +1,99 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Signup = () => {
-  //here would be logic for holding state of input fields (which are FormControls in Bootstrap React)
-  //need some sort of onSubmit function for Button, which would also link to appropriate page
-  const [inputs, setInputs] = useState({
-    username: "",
-    password:"",
-    profile:""
+	const [data, setData] = useState({
+		username: "",
+		profile: "",
+		email: "",
+		password: "",
+	});
+	const [error, setError] = useState("");
+	const navigate = useNavigate();
 
-  });
+	const handleChange = ({ currentTarget: input }) => {
+		setData({ ...data, [input.name]: input.value });
+	};
 
- 
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const url = "http://localhost:5000/api/users/signup";
+			const { data: res } = await axios.post(url, data);
+			navigate("/login");
+			console.log(res.message);
+		} catch (error) {
+			if (
+				error.response &&
+				error.response.status >= 400 &&
+				error.response.status <= 500
+			) {
+				setError(error.response.data.message);
+			}
+		}
+	};
 
-  const onChange = (e) => {
-    setInputs({ ...inputs, [e.target.name]: e.target.value });
-  };
-
-  const createUser = (array) => {
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/signup`, {
-       name:array.name,
-       password:array.password,
-       email:array.email,
-       profile:array.profile
-      })
-      .then((result) => {
-        console.log("result: ", result);
-        console.log(result.data);
-        const newUser = {
-          user_id: result.data.user.user_id,
-          password: result.data.user.password,
-          email: result.data.user.email,
-          profile: result.data.user.profile,
-        };
-        setInputs([...inputs, newUser]);
-      })
-      .catch((error) => console.log(error.response.data));
-  };
-  
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    createUser(inputs);
-    setInputs({
-      profile:"",
-      username: "",
-      password: ""
-     
-  });
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <div className="registerForm" controlId="formUsername">
-      <label>
-        <input
-          type="text"
-          name="Username"
-          onChange={(e) => onChange(e)}
-          value={inputs.username}
-          placeholder="Username"/>
-      </label>
-      
-      </div>
-      <div className="registerForm" controlId="formPassword">
-        <label>
-        <input
-          type="text"
-          name="password"
-          onChange={(e) => onChange(e)}
-          value={inputs.password}
-          placeholder="password"
-          required/>
-          </label>
-     </div>
-
-     
-      <div className="registerForm" controlId="formProfile">
-        <label>
-        <input
-          type="text"
-          name="profile"
-          onChange={(e) => onChange(e)}
-          value={inputs.profile}
-          placeholder="profile"
-          required/>
-          </label>
-     </div>
-      
-      
-      <button onClick={this.handleSubmit} variant="success" type="submit" className="createUser">
-        Create New User
-      </button>
-    </form>
-  );
+	return (
+		<div >
+			<div >
+				<div >
+					<h1>Welcome Back</h1>
+					<Link to="/login">
+						<button type="button" >
+							sign in
+						</button>
+					</Link>
+				</div>
+				<div >
+					<form  onSubmit={handleSubmit}>
+						<h1>Create Account</h1>
+						<input
+							type="text"
+							placeholder="Username"
+							name="username"
+							onChange={handleChange}
+							value={data.username}
+							required
+							
+						/>
+						<input
+							type="text"
+							placeholder="profile"
+							name="profile"
+							onChange={handleChange}
+							value={data.profile}
+							required
+							
+						/>
+						<input
+							type="email"
+							placeholder="Email"
+							name="email"
+							onChange={handleChange}
+							value={data.email}
+							required
+							
+						/>
+						<input
+							type="password"
+							placeholder="Password"
+							name="password"
+							onChange={handleChange}
+							value={data.password}
+							required
+							
+						/>
+						{error && <div >{error}</div>}
+						<button type="submit" >
+							Sign Up
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	);
 };
-}
-
 
 export default Signup;
