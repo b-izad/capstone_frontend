@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { addPost } from "../api/PostAPi";
 
-const NewPostForm = ({ posts, setPosts }) => {
+const NewPost = ({ posts, setPosts }) => {
   const [formFields, setFormFields] = useState({
     title: "",
     author: "",
@@ -67,7 +67,7 @@ const NewPostForm = ({ posts, setPosts }) => {
   );
 };
 
-NewPostForm.propTypes = {
-  addPost: PropTypes.func.isRequired,
-};
-export default NewPostForm;
+// NewPostForm.propTypes = {
+//   addPost: PropTypes.func.isRequired,
+// };
+export default NewPost;
