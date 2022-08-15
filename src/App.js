@@ -1,28 +1,14 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import Login from "./components/Login.js";
 import Home from "./components/Home.js";
 import SignUp from "./components/SignUp";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
-import { getPosts } from "./api/PostAPi";
+// import { getPosts } from "./api/PostAPi";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import NewPost from "./components/NewPost";
 
 function App() {
-  const [posts, setPosts] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
-
-  useEffect((posts) => {
-    getPosts(posts, setPosts, setSearchResults);
-  }, []);
-
-  // useEffect(() => {
-  //   getPosts().then((json) => {
-  //     setPosts(json);
-  //     setSearchResults(json);
-  //   });
-  // }, []);
-
   return (
     <>
       <BrowserRouter>
@@ -67,10 +53,8 @@ function App() {
                 path="/"
                 element={
                   <Home
-                    // posts={posts}
-                    // setPosts={setPosts}
-                    setSearchResults={setSearchResults}
-                    searchResults={searchResults}
+                  // posts={posts}
+                  // setPosts={setPosts}
                   />
                 }
               />

@@ -12,21 +12,21 @@ export const getPosts = (posts, setPosts) => {
     });
 };
 
-export const addPost = (title, author, content, posts, setPosts) => {
+export const addPost = (title, zipcode, content, posts, setPosts) => {
   axios
-    .post(`${process.env.REACT_APP_BACKEND_URL}/posts`, {
+    .post(`${process.env.REACT_APP_BACKEND_URL}/posts/createpost`, {
       title,
-      author,
+      zipcode,
       content,
     })
     .then((result) => {
       console.log("result: ", result);
       console.log(result.data);
       const newPost = {
-        post_id: result.data.post.post_id,
-        title: result.data.post.title,
-        author: result.data.post.author,
-        content: result.data.post.content,
+        post_id: result.post.post_id,
+        title: result.post.title,
+        zipcode: result.post.zipcode,
+        content: result.post.content,
       };
       setPosts([...posts, newPost]);
     })

@@ -14,10 +14,13 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:5000/api/users/signin";
+      const url = "http://localhost:5000/users/login";
       const { data: res } = await axios.post(url, data);
+      console.log(data);
       localStorage.setItem("token", res.data);
       window.location = "/";
+      console.log(res.data);
+      console.log(res.message);
     } catch (error) {
       if (
         error.response &&
@@ -40,6 +43,7 @@ const Login = () => {
           <div className="mb-3 mt-5">
             <label>Email address</label>
             <input
+              name="email"
               className="form-control"
               type="email"
               onChange={handleChange}
@@ -50,6 +54,7 @@ const Login = () => {
           <div className="mb-3">
             <label>Password</label>
             <input
+              name="password"
               className="form-control"
               type="password"
               onChange={handleChange}

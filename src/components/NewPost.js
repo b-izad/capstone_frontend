@@ -2,7 +2,9 @@ import React, { useState } from "react";
 // import PropTypes from "prop-types";
 import { addPost } from "../api/PostAPi";
 
-const NewPost = ({ posts, setPosts }) => {
+const NewPost = () => {
+  const [posts, setPosts] = useState([]);
+
   const [formFields, setFormFields] = useState({
     title: "",
     zipcode: "",
@@ -17,7 +19,7 @@ const NewPost = ({ posts, setPosts }) => {
     setFormFields({ ...formFields, content: event.target.value });
   };
 
-  const onAuthorChange = (event) => {
+  const onZipcodeChange = (event) => {
     setFormFields({ ...formFields, zipcode: event.target.value });
   };
 
@@ -47,7 +49,7 @@ const NewPost = ({ posts, setPosts }) => {
       >
         <h3>Create a post</h3>
         <div className="form-outline mt-5 mb-4">
-          <label className="form-label" for="postTitle">
+          <label className="form-label" htmlFor="postTitle">
             Title
           </label>
           <input
@@ -57,20 +59,20 @@ const NewPost = ({ posts, setPosts }) => {
             onChange={onTitleChange}
             required
           />
-          <label className="form-label" for="postZipcode">
+          <label className="form-label" htmlFor="postZipcode">
             Zipcode
           </label>
           <input
             className="form-control"
             name="postZipcode"
             value={formFields.author}
-            onChange={onAuthorChange}
+            onChange={onZipcodeChange}
             required
           />
 
           {/* <!-- Message input --> */}
-          <div class="form-outline mb-4">
-            <label className="form-label" for="postContent">
+          <div className="form-outline mb-4">
+            <label className="form-label" htmlFor="postContent">
               Message
             </label>
             <textarea
