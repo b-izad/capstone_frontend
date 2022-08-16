@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import paws from "../images/paws.png";
 
 const SignUp = () => {
   const [data, setData] = useState({
@@ -53,14 +54,7 @@ const SignUp = () => {
               required
             />
           </div>
-          {/* <input
-            type="text"
-            placeholder="profile"
-            name="profile"
-            onChange={handleChange}
-            value={data.profile}
-            required
-          /> */}
+
           <div className="mb-3">
             <label>Email</label>
             <input
@@ -93,6 +87,13 @@ const SignUp = () => {
             Already a member? <Link to="/login">Sign In</Link>
           </p>
         </form>
+      </div>
+      <div className="d-flex align-items-center justify-content-center fixed-bottom ">
+        <img
+          className="img-fluid center-block w-25"
+          src={paws}
+          alt="paw prints"
+        />
       </div>
     </div>
   );

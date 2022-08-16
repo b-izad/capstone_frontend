@@ -1,10 +1,8 @@
 import "./App.css";
-// import { useState, useEffect } from "react";
 import Login from "./components/Login.js";
 import Home from "./components/Home.js";
 import SignUp from "./components/SignUp";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
-// import { getPosts } from "./api/PostAPi";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import NewPost from "./components/NewPost";
 
@@ -49,15 +47,7 @@ function App() {
 
           <div>
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <Home
-                  // posts={posts}
-                  // setPosts={setPosts}
-                  />
-                }
-              />
+              <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/newpost" element={<NewPost />} />

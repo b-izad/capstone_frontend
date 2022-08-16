@@ -73,7 +73,7 @@ const Login = () => {
           </p>
         </form>
       </div>
-      <div className="d-flex align-items-center justify-content-center fixed-bottom ">
+      <div className="d-flex align-items-center justify-content-center">
         <img className="img-fluid center-block w-25" src={cat} alt="Cat" />
       </div>
     </>
